@@ -20,17 +20,22 @@ export default {
   },
   props:["joinCity"],
   updated:function(){
-       var $li = document.querySelector('li.citySelect')
-       var code = $li.getAttribute('cityId');
-       this.cityCodeList.push(code)
-       this.$emit('listenToChildEvetn',[...this.cityCodeList])
-    var cityStr = []
-    this.cityList.map( item => {
-        cityStr.push(item.cityName)
-    return cityStr
-    })
-
-    window.sessionStorage.setItem('cityName', cityStr)
+      if(this.joinCity.length>0){
+           var $li = document.querySelector('li.citySelect')
+            var code = $li.getAttribute('cityId');
+            this.cityCodeList.push(code)
+            this.$emit('listenToChildEvetn',[...this.cityCodeList])
+            var cityStr = []
+            this.cityList.map( item => {
+            cityStr.push(item.cityName)
+            return cityStr
+            })
+             window.sessionStorage.setItem('cityName', cityStr)
+      }else{
+           this.$emit('listenToChildEvetn',[0])
+           window.sessionStorage.setItem('cityName', '')
+      }
+      
   },
   mounted () {
 
